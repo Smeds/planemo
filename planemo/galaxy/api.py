@@ -114,6 +114,12 @@ def summarize_history(ctx, gi, history_id):
         print("|")
 
 
+def get_invocation(url, key, invocation_id):
+    inv_gi = gi(None, url, key)
+    invocation = inv_gi.workflows.show_invocation(invocation_id)
+    return invocation
+
+
 def get_invocations(url, key, workflow_id):
     inv_gi = gi(None, url, key)
     invocations = inv_gi.workflows.get_invocations(workflow_id)
