@@ -459,7 +459,11 @@ class GalaxyBaseRunResponse(SuccessfulRunResponse):
         # TODO: rather than creating a directory just use
         # Galaxy paths if they are available in this
         # configuration.
-        output_directory = output_directory or tempfile.mkdtemp()
+
+        if output_directory and not os.path.isdir(output_directory):
+            os.makedirs(output_directory)
+        else:
+            output_directory = tempfile.mkdtemp()
 
         self._ctx.log("collecting outputs to directory %s" % output_directory)
 
